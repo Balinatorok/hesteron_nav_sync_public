@@ -1,7 +1,7 @@
 [project]
 name = "hesteron_nav_sync"
 authors = [
-    { name = "Hesteron Kft." }
+    { name = "NAV Sync" }
 ]
 description = "Pulls inbound (purchase) invoices reported to NAV Online Számla and stages them as draft Purchase Invoices in ERPNext."
 requires-python = ">=3.10"

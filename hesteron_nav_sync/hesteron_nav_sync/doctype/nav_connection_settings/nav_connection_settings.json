@@ -118,7 +118,7 @@
    "fieldname": "software_name",
    "fieldtype": "Data",
    "label": "softwareName",
-   "default": "HesteronNavSync"
+   "default": "ERPNextNavSync"
   },
   {
    "fieldname": "software_main_version",
@@ -134,13 +134,13 @@
    "fieldname": "software_dev_name",
    "fieldtype": "Data",
    "label": "softwareDevName",
-   "default": "Hesteron Kft."
+   "description": "A NAV ezt látja fejlesztőként. Üresen: a Cég neve."
   },
   {
    "fieldname": "software_dev_contact",
    "fieldtype": "Data",
    "label": "softwareDevContact (e-mail)",
-   "default": "info@hesteron.hu"
+   "description": "Kapcsolattartó e-mail a NAV felé. Üresen: a Cég e-mail-címe."
   },
   {
    "fieldname": "section_defaults",

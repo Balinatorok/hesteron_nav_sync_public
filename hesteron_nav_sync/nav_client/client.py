@@ -95,11 +95,11 @@ class SoftwareInfo:
 	"""
 
 	software_id: str
-	software_name: str = "HesteronNavSync"
+	software_name: str = "ERPNextNavSync"
 	software_operation: str = "LOCAL_SOFTWARE"
 	software_main_version: str = "1.0"
-	software_dev_name: str = "Hesteron Kft."
-	software_dev_contact: str = "info@hesteron.hu"
+	software_dev_name: str = ""
+	software_dev_contact: str = ""
 	software_dev_country_code: str = "HU"
 	software_dev_tax_number: Optional[str] = None
 

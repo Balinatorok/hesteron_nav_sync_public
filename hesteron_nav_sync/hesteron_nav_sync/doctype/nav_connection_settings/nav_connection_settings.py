@@ -30,11 +30,20 @@ class NAVConnectionSettings(Document):
 
 		return SoftwareInfo(
 			software_id=self.software_id,
-			software_name=self.software_name or "HesteronNavSync",
+			software_name=self.software_name or "ERPNextNavSync",
 			software_main_version=self.software_main_version or "1.0",
-			software_dev_name=self.software_dev_name or "Hesteron Kft.",
-			software_dev_contact=self.software_dev_contact or "info@hesteron.hu",
+			software_dev_name=self.software_dev_name or self.company,
+			software_dev_contact=self._software_dev_contact(),
 		)
+
+	def _software_dev_contact(self):
+		"""softwareDevContact is mandatory for NAV: the field, else the Company's e-mail."""
+		contact = self.software_dev_contact
+		if not contact and self.company:
+			contact = frappe.db.get_value("Company", self.company, "email")
+		if not contact:
+			frappe.throw(_("Add meg a softwareDevContact e-mail-címet (a saját cégedét) a NAV Connection Settings-ben."))
+		return contact
 
 	def get_client(self):
 		from hesteron_nav_sync.nav_client.client import NavInvoiceClient

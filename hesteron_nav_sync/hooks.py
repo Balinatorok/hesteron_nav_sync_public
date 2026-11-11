@@ -1,12 +1,12 @@
 from . import __version__ as app_version
 
 app_name = "hesteron_nav_sync"
-app_title = "Hesteron NAV Sync"
-app_publisher = "Hesteron Kft."
+app_title = "NAV Online Számla Sync"
+app_publisher = "NAV Sync"
 app_description = "NAV Online Számla bejövő számlák -> cikk-egyeztetés -> bevételezés (Purchase Receipt) ERPNextben."
 app_icon = "octicon octicon-repo-pull"
 app_color = "green"
-app_email = "info@hesteron.hu"
+app_email = ""
 app_license = "mit"
 
 after_install = "hesteron_nav_sync.install.after_install"
