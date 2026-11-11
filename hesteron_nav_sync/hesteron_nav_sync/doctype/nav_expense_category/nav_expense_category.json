@@ -1,0 +1,122 @@
+{
+ "doctype": "DocType",
+ "name": "NAV Expense Category",
+ "module": "Hesteron Nav Sync",
+ "autoname": "field:category_name",
+ "engine": "InnoDB",
+ "naming_rule": "By fieldname",
+ "title_field": "category_name",
+ "sort_field": "category_name",
+ "sort_order": "ASC",
+ "field_order": [
+  "category_name",
+  "target",
+  "column_break_1",
+  "expense_account",
+  "negative_account",
+  "section_detect",
+  "keywords",
+  "column_break_2",
+  "group_by_carrier",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "category_name",
+   "label": "Kategória",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "target",
+   "label": "Cél",
+   "fieldtype": "Select",
+   "options": "Költség\nSaját felhasználás\nBeszerzési járulék",
+   "default": "Költség",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "expense_account",
+   "label": "Főkönyvi számla",
+   "fieldtype": "Link",
+   "options": "Account",
+   "in_list_view": 1,
+   "description": "Ide kerül a beszerzési számlán ez a kategória. A könyvelő adja meg."
+  },
+  {
+   "fieldname": "negative_account",
+   "label": "Főkönyvi számla negatív összegre",
+   "fieldtype": "Link",
+   "options": "Account",
+   "description": "Opcionális. Ha a sor negatív (pl. kerekítés a javunkra), ide kerül. Kerekítésnél: 9699."
+  },
+  {
+   "fieldname": "section_detect",
+   "label": "Felismerés",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "keywords",
+   "label": "Kulcsszavak a megnevezésben",
+   "fieldtype": "Small Text",
+   "description": "Vesszővel elválasztva. Ha a NAV-sor megnevezése tartalmazza bármelyiket, ez a kategória lesz — szállítótól függetlenül (pl. 'kerekítés')."
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "group_by_carrier",
+   "label": "Fuvarozónként bontva",
+   "fieldtype": "Check",
+   "description": "A beszerzési számlán fuvarozónként (GLS, DPD, Posta, Foxpost …) külön sor."
+  },
+  {
+   "fieldname": "description",
+   "label": "Megjegyzés",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Purchase User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Stock User",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}

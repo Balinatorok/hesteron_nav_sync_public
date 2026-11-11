@@ -1,0 +1,94 @@
+{
+ "doctype": "DocType",
+ "name": "NAV Item Mapping Rule",
+ "module": "Hesteron Nav Sync",
+ "autoname": "hash",
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier",
+  "supplier_code",
+  "description_pattern",
+  "item",
+  "target",
+  "expense_category",
+  "learned_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "options": "Supplier",
+   "label": "Szállító",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "supplier_code",
+   "fieldtype": "Data",
+   "label": "Szállítói cikkszám / NAV kód",
+   "in_list_view": 1,
+   "description": "Ha a NAV-számla tételén ez a kód szerepel (productCode OWN/OTHER), ez a cikk lesz."
+  },
+  {
+   "fieldname": "description_pattern",
+   "fieldtype": "Data",
+   "label": "Megnevezés (pontos vagy részlet)",
+   "in_list_view": 1,
+   "description": "Pontos egyezés = 100%, ha a NAV megnevezés csak tartalmazza = 95%."
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "label": "Cikk",
+   "in_list_view": 1,
+   "depends_on": "eval:!doc.target || doc.target == 'Készletre'"
+  },
+  {
+   "fieldname": "target",
+   "label": "Cél",
+   "fieldtype": "Select",
+   "options": "Készletre\nKöltség\nSaját felhasználás\nBeszerzési járulék",
+   "default": "Készletre",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "expense_category",
+   "label": "Költségkategória",
+   "fieldtype": "Link",
+   "options": "NAV Expense Category",
+   "in_list_view": 1,
+   "depends_on": "eval:doc.target && doc.target != 'Készletre'"
+  },
+  {
+   "fieldname": "learned_from",
+   "fieldtype": "Link",
+   "options": "NAV Inbound Invoice Import",
+   "label": "Tanulva ebből",
+   "read_only": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Purchase User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Stock User",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  }
+ ]
+}

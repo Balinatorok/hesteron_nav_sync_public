@@ -1,0 +1,279 @@
+{
+ "doctype": "DocType",
+ "name": "NAV Inbound Invoice Import",
+ "module": "Hesteron Nav Sync",
+ "autoname": "hash",
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "title",
+ "track_changes": 1,
+ "field_order": [
+  "title",
+  "status",
+  "nav_invoice_number",
+  "invoice_category",
+  "column_break_h1",
+  "supplier",
+  "supplier_tax_number",
+  "supplier_name",
+  "column_break_h2",
+  "invoice_issue_date",
+  "delivery_date",
+  "ins_date",
+  "section_amounts",
+  "currency",
+  "exchange_rate",
+  "column_break_a1",
+  "net_total",
+  "vat_total",
+  "grand_total",
+  "column_break_a2",
+  "is_modification",
+  "original_invoice_number",
+  "learn_mappings",
+  "section_lines",
+  "lines",
+  "section_links",
+  "linked_purchase_receipt",
+  "linked_purchase_invoice",
+  "column_break_l1",
+  "error_message",
+  "section_raw",
+  "invoice_json",
+  "raw_xml"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Állapot",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1,
+   "options": "Új\nEgyeztetésre vár\nBevételezhető\nRögzíthető\nBevételezés létrehozva\nSzámla létrehozva\nMódosító számla\nKihagyva\nHiba",
+   "default": "Új"
+  },
+  {
+   "fieldname": "nav_invoice_number",
+   "fieldtype": "Data",
+   "label": "NAV számlaszám",
+   "reqd": 1,
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "invoice_category",
+   "fieldtype": "Data",
+   "label": "Számla típusa (NAV)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_h1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "options": "Supplier",
+   "label": "Szállító (ERPNext)",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "supplier_tax_number",
+   "fieldtype": "Data",
+   "label": "Szállító adószáma",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Szállító neve (NAV)",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_h2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "invoice_issue_date",
+   "fieldtype": "Date",
+   "label": "Számla kelte",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "label": "Teljesítés dátuma",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ins_date",
+   "fieldtype": "Datetime",
+   "label": "NAV beérkezés (insDate)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_amounts",
+   "fieldtype": "Section Break",
+   "label": "Összegek"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "options": "Currency",
+   "label": "Pénznem",
+   "read_only": 1
+  },
+  {
+   "fieldname": "exchange_rate",
+   "fieldtype": "Float",
+   "label": "Árfolyam (NAV)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_a1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "net_total",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "label": "Nettó",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vat_total",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "label": "ÁFA",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "label": "Bruttó",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_a2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_modification",
+   "fieldtype": "Check",
+   "label": "Módosító / érvénytelenítő számla",
+   "read_only": 1
+  },
+  {
+   "fieldname": "original_invoice_number",
+   "fieldtype": "Data",
+   "label": "Eredeti számla száma",
+   "read_only": 1,
+   "depends_on": "is_modification"
+  },
+  {
+   "fieldname": "learn_mappings",
+   "fieldtype": "Check",
+   "label": "Tanulja meg a megerősített egyezéseket",
+   "default": "1",
+   "description": "Bevételezéskor a kézzel kiválasztott/megerősített cikkekből NAV Item Mapping Rule készül, így legközelebb automatikus lesz."
+  },
+  {
+   "fieldname": "section_lines",
+   "fieldtype": "Section Break",
+   "label": "Tételek egyeztetése"
+  },
+  {
+   "fieldname": "lines",
+   "fieldtype": "Table",
+   "options": "NAV Inbound Invoice Import Line",
+   "label": "Tételek"
+  },
+  {
+   "fieldname": "section_links",
+   "fieldtype": "Section Break",
+   "label": "Létrehozott bizonylatok"
+  },
+  {
+   "fieldname": "linked_purchase_receipt",
+   "fieldtype": "Link",
+   "options": "Purchase Receipt",
+   "label": "Bevételezés (Purchase Receipt)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "linked_purchase_invoice",
+   "fieldtype": "Link",
+   "options": "Purchase Invoice",
+   "label": "Beszerzési számla (Purchase Invoice)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_l1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "error_message",
+   "fieldtype": "Small Text",
+   "label": "Megjegyzés / hiba",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_raw",
+   "fieldtype": "Section Break",
+   "label": "Nyers adat (audit)",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "invoice_json",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "label": "Feldolgozott számlaadat (JSON)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "raw_xml",
+   "fieldtype": "Attach",
+   "label": "Eredeti NAV XML",
+   "read_only": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Purchase User",
+   "read": 1,
+   "write": 1,
+   "report": 1
+  },
+  {
+   "role": "Stock User",
+   "read": 1,
+   "write": 1,
+   "report": 1
+  }
+ ]
+}

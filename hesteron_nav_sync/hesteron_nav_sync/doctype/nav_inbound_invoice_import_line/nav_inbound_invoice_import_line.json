@@ -1,0 +1,261 @@
+{
+ "doctype": "DocType",
+ "name": "NAV Inbound Invoice Import Line",
+ "module": "Hesteron Nav Sync",
+ "istable": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "line_number",
+  "nav_description",
+  "nav_product_code",
+  "qty",
+  "nav_uom",
+  "rate",
+  "match_status",
+  "target",
+  "expense_category",
+  "group_label",
+  "target_source",
+  "item_code",
+  "item_name",
+  "match_confidence",
+  "section_details",
+  "match_method",
+  "match_note",
+  "column_break_d1",
+  "uom",
+  "warehouse",
+  "helykod",
+  "has_serial_no",
+  "has_batch_no",
+  "is_stock_item",
+  "column_break_d2",
+  "net_amount",
+  "vat_label",
+  "nav_vtsz",
+  "nature",
+  "purchase_order",
+  "purchase_order_item",
+  "suggested_item_group",
+  "suggested_brand"
+ ],
+ "fields": [
+  {
+   "fieldname": "line_number",
+   "fieldtype": "Int",
+   "label": "#",
+   "read_only": 1
+  },
+  {
+   "fieldname": "nav_description",
+   "fieldtype": "Small Text",
+   "label": "NAV megnevezés",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "nav_product_code",
+   "fieldtype": "Data",
+   "label": "NAV cikkkód / EAN",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "label": "Menny.",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "nav_uom",
+   "fieldtype": "Data",
+   "label": "NAV ME",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "label": "Egységár",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "match_status",
+   "fieldtype": "Select",
+   "label": "Egyeztetés",
+   "options": "Egyeztetve\nJavaslat\nÚj cikk\nKategória kell\nKihagy",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "target",
+   "label": "Cél",
+   "fieldtype": "Select",
+   "options": "Készletre\nKöltség\nSaját felhasználás\nBeszerzési járulék",
+   "default": "Készletre",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "expense_category",
+   "label": "Költségkategória",
+   "fieldtype": "Link",
+   "options": "NAV Expense Category",
+   "in_list_view": 1,
+   "columns": 2,
+   "depends_on": "eval:doc.target && doc.target != 'Készletre'",
+   "mandatory_depends_on": "eval:doc.target && doc.target != 'Készletre' && doc.match_status != 'Kihagy'"
+  },
+  {
+   "fieldname": "group_label",
+   "label": "Csoport (fuvarozó)",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "target_source",
+   "label": "Cél forrása",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "options": "Item",
+   "label": "Cikk",
+   "in_list_view": 1,
+   "columns": 2,
+   "depends_on": "eval:!doc.target || doc.target == 'Készletre'"
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Cikk neve",
+   "fetch_from": "item_code.item_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "match_confidence",
+   "fieldtype": "Int",
+   "label": "Biztos %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break",
+   "label": "Részletek"
+  },
+  {
+   "fieldname": "match_method",
+   "fieldtype": "Data",
+   "label": "Egyeztetés módja",
+   "read_only": 1
+  },
+  {
+   "fieldname": "match_note",
+   "fieldtype": "Small Text",
+   "label": "Magyarázat / teendő",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_d1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "options": "UOM",
+   "label": "ME (ERPNext)"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "options": "Warehouse",
+   "label": "Raktár"
+  },
+  {
+   "fieldname": "helykod",
+   "fieldtype": "Data",
+   "label": "Helykód",
+   "read_only": 1
+  },
+  {
+   "fieldname": "has_serial_no",
+   "fieldtype": "Check",
+   "label": "Sorozatszámos",
+   "read_only": 1
+  },
+  {
+   "fieldname": "has_batch_no",
+   "fieldtype": "Check",
+   "label": "Sarzsos",
+   "read_only": 1
+  },
+  {
+   "fieldname": "is_stock_item",
+   "fieldtype": "Check",
+   "label": "Készletcikk",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_d2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "label": "Nettó érték",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vat_label",
+   "fieldtype": "Data",
+   "label": "ÁFA",
+   "read_only": 1
+  },
+  {
+   "fieldname": "nav_vtsz",
+   "fieldtype": "Data",
+   "label": "VTSZ (NAV)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "nature",
+   "fieldtype": "Data",
+   "label": "Jelleg (NAV)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "purchase_order",
+   "fieldtype": "Link",
+   "options": "Purchase Order",
+   "label": "Beszerzési rendelés"
+  },
+  {
+   "fieldname": "purchase_order_item",
+   "fieldtype": "Data",
+   "label": "PO sor",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "suggested_item_group",
+   "fieldtype": "Link",
+   "options": "Item Group",
+   "label": "Javasolt cikkcsoport",
+   "read_only": 1
+  },
+  {
+   "fieldname": "suggested_brand",
+   "fieldtype": "Link",
+   "options": "Brand",
+   "label": "Javasolt márka",
+   "read_only": 1
+  }
+ ]
+}

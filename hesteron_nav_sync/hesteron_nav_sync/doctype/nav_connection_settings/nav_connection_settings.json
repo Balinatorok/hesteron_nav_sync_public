@@ -1,0 +1,269 @@
+{
+ "doctype": "DocType",
+ "name": "NAV Connection Settings",
+ "module": "Hesteron Nav Sync",
+ "issingle": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "environment",
+  "column_break_1",
+  "company",
+  "tax_number",
+  "section_credentials",
+  "technical_user_login",
+  "technical_user_password",
+  "column_break_2",
+  "sign_key",
+  "exchange_key",
+  "section_software",
+  "software_id",
+  "software_name",
+  "software_main_version",
+  "column_break_3",
+  "software_dev_name",
+  "software_dev_contact",
+  "section_defaults",
+  "default_warehouse",
+  "default_cost_center",
+  "column_break_4",
+  "default_expense_item",
+  "notify_email",
+  "section_state",
+  "last_sync_insdate",
+  "sync_from_date",
+  "section_pdf_mail",
+  "pdf_mail_enabled",
+  "pdf_mail_connected_app",
+  "pdf_mail_user",
+  "column_break_pdf",
+  "pdf_mail_folder",
+  "pdf_mail_delete_after",
+  "pdf_mail_last_run",
+  "pdf_mail_last_result"
+ ],
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Szinkron bekapcsolva",
+   "description": "Kikapcsolva az ütemezett lekérdezés nem fut; a kulcsok megmaradnak."
+  },
+  {
+   "fieldname": "environment",
+   "fieldtype": "Select",
+   "label": "NAV környezet",
+   "options": "Production\nTest",
+   "default": "Production",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "options": "Company",
+   "label": "Cég",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tax_number",
+   "fieldtype": "Data",
+   "label": "Adószám törzsszáma (8 számjegy)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_credentials",
+   "fieldtype": "Section Break",
+   "label": "NAV technikai felhasználó"
+  },
+  {
+   "fieldname": "technical_user_login",
+   "fieldtype": "Data",
+   "label": "Felhasználónév"
+  },
+  {
+   "fieldname": "technical_user_password",
+   "fieldtype": "Password",
+   "label": "Jelszó"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sign_key",
+   "fieldtype": "Password",
+   "label": "Aláíró kulcs"
+  },
+  {
+   "fieldname": "exchange_key",
+   "fieldtype": "Password",
+   "label": "Cserekulcs (16 karakter)"
+  },
+  {
+   "fieldname": "section_software",
+   "fieldtype": "Section Break",
+   "label": "Szoftver-azonosítás (NAV kötelező adat)"
+  },
+  {
+   "fieldname": "software_id",
+   "fieldtype": "Data",
+   "label": "softwareId (pontosan 18 karakter, [0-9A-Z-])",
+   "description": "Javasolt: HU + 8 jegyű adószám + NAVSYNC1. Egyszer beállítva ne változtasd."
+  },
+  {
+   "fieldname": "software_name",
+   "fieldtype": "Data",
+   "label": "softwareName",
+   "default": "HesteronNavSync"
+  },
+  {
+   "fieldname": "software_main_version",
+   "fieldtype": "Data",
+   "label": "softwareMainVersion",
+   "default": "1.0"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "software_dev_name",
+   "fieldtype": "Data",
+   "label": "softwareDevName",
+   "default": "Hesteron Kft."
+  },
+  {
+   "fieldname": "software_dev_contact",
+   "fieldtype": "Data",
+   "label": "softwareDevContact (e-mail)",
+   "default": "info@hesteron.hu"
+  },
+  {
+   "fieldname": "section_defaults",
+   "fieldtype": "Section Break",
+   "label": "Bevételezési alapértékek"
+  },
+  {
+   "fieldname": "default_warehouse",
+   "fieldtype": "Link",
+   "options": "Warehouse",
+   "label": "Alapértelmezett raktár",
+   "description": "Ahova a bevételezés megy, ha a cikknek nincs saját alapraktára."
+  },
+  {
+   "fieldname": "default_cost_center",
+   "fieldtype": "Link",
+   "options": "Cost Center",
+   "label": "Alapértelmezett költséghely"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_expense_item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "label": "Szolgáltatás / egyéb költség cikk",
+   "description": "Opcionális: nem-készlet cikk a szolgáltatás-sorokhoz (pl. szállítási díj), ha a számlán ilyen is szerepel."
+  },
+  {
+   "fieldname": "notify_email",
+   "fieldtype": "Data",
+   "label": "Értesítő e-mail",
+   "description": "Ha ki van töltve, minden új, egyeztetésre váró számláról e-mail megy."
+  },
+  {
+   "fieldname": "section_state",
+   "fieldtype": "Section Break",
+   "label": "Szinkron állapota"
+  },
+  {
+   "fieldname": "last_sync_insdate",
+   "fieldtype": "Datetime",
+   "label": "Utolsó sikeres lekérdezés (insDate)",
+   "description": "Csak akkor írd át, ha szándékosan korábbról akarsz újra szinkronizálni."
+  },
+  {
+   "fieldname": "sync_from_date",
+   "fieldtype": "Date",
+   "label": "Első szinkron kezdődátuma",
+   "description": "Az első futásnál ettől a naptól kérdezi le a számlákat (üresen: az elmúlt 7 nap)."
+  },
+  {
+   "fieldname": "section_pdf_mail",
+   "fieldtype": "Section Break",
+   "label": "Számlakép e-mailből (Microsoft Graph)"
+  },
+  {
+   "fieldname": "pdf_mail_enabled",
+   "fieldtype": "Check",
+   "label": "Számlakép-levelek olvasása bekapcsolva",
+   "default": "0"
+  },
+  {
+   "fieldname": "pdf_mail_connected_app",
+   "fieldtype": "Link",
+   "label": "Connected App (Microsoft Graph, Mail.ReadWrite)",
+   "options": "Connected App",
+   "depends_on": "pdf_mail_enabled",
+   "mandatory_depends_on": "pdf_mail_enabled"
+  },
+  {
+   "fieldname": "pdf_mail_user",
+   "fieldtype": "Link",
+   "label": "Felhasználó, akinek a postafiókját olvassa",
+   "options": "User",
+   "depends_on": "pdf_mail_enabled",
+   "mandatory_depends_on": "pdf_mail_enabled",
+   "description": "Ennek a felhasználónak kell egyszer belépnie a Connected App-on (Authorize)."
+  },
+  {
+   "fieldname": "column_break_pdf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pdf_mail_folder",
+   "fieldtype": "Data",
+   "label": "Mappa a Beérkezett üzenetek alatt",
+   "default": "ERP Szamlak",
+   "depends_on": "pdf_mail_enabled"
+  },
+  {
+   "fieldname": "pdf_mail_delete_after",
+   "fieldtype": "Check",
+   "label": "Feldolgozás után a levél törlése",
+   "default": "1",
+   "depends_on": "pdf_mail_enabled",
+   "description": "Csak a sikeresen csatolt számlaképek levelét törli; a párosítatlanok a mappában maradnak."
+  },
+  {
+   "fieldname": "pdf_mail_last_run",
+   "fieldtype": "Datetime",
+   "label": "Utolsó futás",
+   "read_only": 1,
+   "depends_on": "pdf_mail_enabled"
+  },
+  {
+   "fieldname": "pdf_mail_last_result",
+   "fieldtype": "Small Text",
+   "label": "Utolsó futás eredménye",
+   "read_only": 1,
+   "depends_on": "pdf_mail_enabled"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "email": 1
+  }
+ ]
+}
